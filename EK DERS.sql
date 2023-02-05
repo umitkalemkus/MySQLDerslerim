@@ -46,6 +46,31 @@ select isim, maas from calisanlar
 where id='1002' and maas*0.25>(select ek_gelir from aileler where  aileler.id='1002');
 
 
+-- Soru 3) iki tabloyu birlikte listeleyiniz
+select calisanlar.id, isim, maas, ek_gelir, cocuk_sayisi from aileler , calisanlar;
+
+select * from aileler , calisanlar where aileler.id = calisanlar.id
+
+
+-- soru 4) Çalisanların isim ve cocuk_sayisi'ni listeyen sorguyu yazınız.
+
+select isim ,cocuk_sayisi as cocuk from aileler , calisanlar where aileler.id = calisanlar.id;
+
+ -- Soru 5) Çalisanlar' ın  isim ve toplam_gelir'lerini gösteren bir sorgu yazınız. 
+	-- toplam_gelir = calisanlar.maas + aileler.ek_gelir  
+    
+select isim, (maas+ek_gelir) from  aileler , calisanlar where aileler.id = calisanlar.id;
+select isim, (maas+ek_gelir) as ToplamGelir from calisanlar , aileler where calisanlar.id=aileler.id;
+
+
+-- Soru 7) İsminde 'al' ifadesi geçen kişilerin isim ve ek gelirlerini listeleyiniz
+select isim, ek_gelir from calisanlar, aileler where aileler.id = calisanlar.id and isim like '%al%';
+
+select isim, ek_gelir from calisanlar, aileler where calisanlar.id=aileler.id and isim like '%al%';
+
+
+
+
 
 
 
