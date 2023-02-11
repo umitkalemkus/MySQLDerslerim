@@ -50,14 +50,48 @@ where sirket in (select sirket  from sirketler WHERE sirket_id > 101);
 
 -- Ankara’daki şirketlerin sirket_id ve çalışan sayılarını listeleyiniz.
 
-select sirket_id , personel_sayisi from sirketler;
+select sirket_id , personel_sayisi from sirketler
+where sirket in (select sirket from personel where sehir = 'Ankara');
 
+/* SELECT’den sonra kullanılabilir. Ancak SELECT CLAUSE’da kullanılan Subquery SADECE 1 DEĞER
+dönmelidir. Dolayısıyla SUM, COUNT, MIN, MAX ve AVG gibi fonksiyonlar kullanılır.
+Bu fonksiyonlara AGGREGATE FUNCTION denir. */
 
+select sum(maas) from personel;
+select avg(maas) from personel;
 
+-- Kaç personele maaş ödüyorum
+select count(id) from personel;
 
+-- En yüksek maaş nedir
+select max(maas) from personel;
 
+-- Her şirketin ismini, personel sayısını ve 
+-- personelin ortalama maaşını listeleyen bir QUERY yazın.
 
+select sirket , 
+(select avg(maas) from personel where personel.sirket = sirketler.sirket) AS 'oRTALAMA'  from sirketler;
 
+-- Her şirketin ismini, personel sayısını ve 
+-- personelin aldığı max. ve min. maaşı listeleyen bir QUERY yazın.
+​
+ select sirket, 
+(select max(maas)  from personel where personel.sirket = sirketler.sirket) AS 'ORTALAMA MAAS ' from sirketler;
+
+-- Her şirketin id’sini, ismini ve 
+-- toplam kaç şehirde bulunduğunu listeleyen bir QUERY yazınız.alter
+select sirket_id, sirket,
+(select count(distinct sehir) from personel where personel.sirket = sirketler.sirket)  from sirketler;
+
+ -- Her şirketin ismini, personel sayısını ve 
+-- personelin aldığı max. ve min. maaşı listeleyen bir QUERY yazın.
+​
+SELECT sirket as Şirket,
+personel_sayisi AS 'Personel Sayısı',
+(SELECT max(maas) FROM personel where personel.sirket = sirketler.sirket) AS 'Max Maas',
+(SELECT min(maas) FROM personel where personel.sirket = sirketler.sirket) AS 'Min Maas'
+FROM sirketler;
+​
 
 
 
