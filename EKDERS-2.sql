@@ -5,7 +5,7 @@ drop table if exists product_group;
 create table product_group (
 g_code 	  char(7) primary key not null,
 g_name 	  varchar(45),
-p_manager varchar(45) default 'tanımlanmadı' );
+p_manager varchar(45) default 'tanımlanmadı');
 ​
 create table products (
 p_code varchar(20) unique not null,
@@ -28,3 +28,29 @@ insert into products(p_code,p_name,g_code,fiyat) values
 ('BL13', 'Brother Lazer Printr','PR',120),('DT06','Zenon Desktop Computer',	'DT',475),
 ('IJ10', 'HP InkJet Printer',  	'PR', 70),('DT07','Dell Desktop Computer',	'DT',495),
 ('LZ30', 'HP Lazer Printer',   	'PR', 99),('DT08','HP Desktop Computer',	'DT',500);
+
+
+select * from products where fiyat = (select min(fiyat) from products where g_code='DT');
+
+
+
+
+ Soru 11) Her ürün grubundan kaç adet ürün vardır listeleyiniz.
+ 
+ select g_code, count(g_code) from products group by g_code;
+ 
+  Soru 12) Her ürün grubundaki en ucuz urunleri listeleyiniz.
+  
+ select g_code AS 'Grup Kodu', min(fiyat) as 'Minimum Fiyat', 
+ (select g_name from product_group where product_group.g_code=products.g_code) 
+  as 'Ürün Adı' from products group by g_code;  
+  
+  select g_code, (select g_name from product_group where product_group.g_code=products.g_code)as grup, 
+ count(g_code) from products group by g_code;
+ 
+Soru 14) Her ürün grubundan kaç adet ürün vardır ve ortalma fiyatları nedir listeleyiniz.
+ 
+ select g_code, (select g_name from product_group where product_group.g_code=products.g_code)as grup, 
+ count(g_code) , avg(fiyat) from product;
+ 
+  

@@ -187,6 +187,42 @@ kelime varchar(50) NOT NULL,
 Harf_sayisi int
 );
 
+INSERT INTO kelimeler VALUES (1001, 'hot', 3);
+INSERT INTO kelimeler VALUES (1002, 'hat', 3);
+INSERT INTO kelimeler VALUES (1003, 'hit', 3);
+INSERT INTO kelimeler VALUES (1004, 'hbt', 3);
+INSERT INTO kelimeler VALUES (1008, 'hct', 3);
+INSERT INTO kelimeler VALUES (1005, 'adem', 4);
+INSERT INTO kelimeler VALUES (1006, 'selim', 5);
+INSERT INTO kelimeler VALUES (1007, 'yusuf', 5);
+​
+SELECT * FROM kelimeler;
+
+-- SORU: İlk harfi h, son harfi t olup 2.harfi a veya i olan 3 harfli kelimelerin tüm bilgilerini yazdıran QUERY yazın.
+SELECT *
+FROM kelimeler
+WHERE  REGEXP_LIKE (kelime, 'h[ai]t');
+
+
+-- SORU 1: İlk harfi h olmayan kelimelerin tüm bilgilerini yazdıran QUERY yazın.
+SELECT *
+FROM kelimeler
+WHERE kelime NOT LIKE 'h%';
+
+SELECT UPPER(kelime) FROM kelimeler; 
+SELECT LOWER(kelime) FROM kelimeler; 
+
+SELECT * FROM musteriler LIMIT 3;
+
+
+
+
+
+
+
+
+
+
 
 
 
