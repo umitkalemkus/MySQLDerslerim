@@ -10,6 +10,14 @@ isim varchar(50),
 adres varchar(100),
 sinav_notu int
 );
+ create view ogrenciler_view AS
+ select id, isim  from ogrenciler order by isim ;
+ 
+ select * from  ogrenciler_view
+
+
+
+
  drop table ogrenciler;
 select * from ogrenciler;
 insert into ogrenciler (id, isim, adres, sinav_notu)
