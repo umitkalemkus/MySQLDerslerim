@@ -80,6 +80,7 @@ RIGHT JOIN
 ​
  DROP TABLE sirketler;
  DROP TABLE siparisler;
+ DROP TABLE siparisler;
 ​
 CREATE TABLE sirketler
 (
